@@ -1,0 +1,23 @@
+{
+    "name": "sheppers/rest-describe-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 bundle to describe a RESTful web service",
+    "keywords": ["rest", "bundle", "api", "doc"],
+    "homepage": "https://github.com/lshepstone/rest-describe-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lawrance Shepstone",
+            "email": "lawrance.shepstone@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/symfony": "2.2.*"
+    },
+    "autoload": {
+        "psr-0": { "Sheppers\\RestDescribeBundle": "src" }
+    }
+}

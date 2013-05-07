@@ -1,0 +1,35 @@
+parameters:
+    sheppers_rest_describe.describer.class: Sheppers\RestDescribeBundle\Describer\Describer
+    sheppers_rest_describe.describer.describe_resource_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeResourceProcessor
+    sheppers_rest_describe.describer.describe_operation_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeOperationProcessor
+    sheppers_rest_describe.describer.describe_request_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeRequestProcessor
+    sheppers_rest_describe.describer.describe_response_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeResponseProcessor
+
+services:
+    sheppers_rest_describe.describer:
+        class: %sheppers_rest_describe.describer.class%
+        arguments:  [ @router, @annotation_reader, @doctrine.orm.describe_entity_manager ]
+
+    sheppers_rest_describe.describer.describe_resource_processor:
+        class: %sheppers_rest_describe.describer.describe_resource_processor.class%
+        arguments: [ @doctrine.orm.describe_entity_manager ]
+        tags:
+            -  { name: sheppers_rest_describe.processor }
+
+    sheppers_rest_describe.describer.describe_operation_processor:
+        class: %sheppers_rest_describe.describer.describe_operation_processor.class%
+        arguments: [ @doctrine.orm.describe_entity_manager ]
+        tags:
+            -  { name: sheppers_rest_describe.processor }
+
+    sheppers_rest_describe.describer.describe_request_processor:
+        class: %sheppers_rest_describe.describer.describe_request_processor.class%
+        arguments: [ @doctrine.orm.describe_entity_manager, @annotation_reader ]
+        tags:
+            -  { name: sheppers_rest_describe.processor }
+
+    sheppers_rest_describe.describer.describe_response_processor:
+        class: %sheppers_rest_describe.describer.describe_response_processor.class%
+        arguments: [ @doctrine.orm.describe_entity_manager ]
+        tags:
+            -  { name: sheppers_rest_describe.processor }
