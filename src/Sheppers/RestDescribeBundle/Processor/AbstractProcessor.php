@@ -17,14 +17,4 @@ abstract class AbstractProcessor implements ProcessorInterface
     {
         $this->entityManager = $entityManager;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    abstract public function supports($annotation, $entity);
-
-    /**
-     * {@inheritDoc}
-     */
-    abstract public function process($annotation, $entity, array $meta = null);
 }
