@@ -87,6 +87,15 @@ class Operation
     protected $parameters = array();
 
     /**
+     * Operation response codes.
+     *
+     * @ORM\OneToMany(targetEntity="Response", mappedBy="operation")
+     *
+     * @var array
+     */
+    protected $responses = array();
+
+    /**
      * @param string $name
      * @param Resource $resource
      */
@@ -95,6 +104,7 @@ class Operation
         $this->setName($name);
         $this->setResource($resource);
         $this->parameters = new ArrayCollection();
+        $this->responses = new ArrayCollection();
     }
 
     /**
@@ -223,5 +233,13 @@ class Operation
     public function getScope()
     {
         return $this->scope;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponses()
+    {
+        return $this->responses;
     }
 }

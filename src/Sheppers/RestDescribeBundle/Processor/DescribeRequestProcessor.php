@@ -189,7 +189,7 @@ class DescribeRequestProcessor extends AbstractProcessor
     }
 
     /**
-     * Persist an array of parameters to the data store.
+     * Persists an array of parameters to the data store.
      *
      * @param array $parameters
      * @param Operation $operation
