@@ -49,7 +49,8 @@ class OperationController extends Controller
                 'href' => $this->generateUrl('RestDescribe_Operations_getOperation', array(
                     'resource' => $operation->getResource()->getName(),
                     'operation' => $operation->getName()
-                ), true)
+                ), true),
+                'description' => $operation->getNote()
             );
         }
 
@@ -95,7 +96,9 @@ class OperationController extends Controller
                 )
             ),
             'name' => $operation->getName(),
+            'description' => $operation->getNote(),
             'scope' => $operation->getScope(),
+            'method' => $operation->getMethod(),
             'uri' => $operation->getUri()
         );
 
