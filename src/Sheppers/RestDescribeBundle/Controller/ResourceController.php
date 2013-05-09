@@ -3,6 +3,7 @@
 namespace Sheppers\RestDescribeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sheppers\RestDescribeBundle\Annotation\Describe;
@@ -23,16 +24,19 @@ class ResourceController extends Controller
      *   note="Gets all resources and their relationships"
      * )
      */
-    public function getResourcesAction()
+    public function getResourcesAction(Request $request)
     {
         $resources = $this->getDoctrine()->getManager('describe')
             ->getRepository('SheppersRestDescribeBundle:Resource')
             ->findAll()
         ;
 
-        $data = array();
+        $data = array(
+            'href' => $request->getUri()
+        );
+
         foreach ($resources as $resource) {
-            $data['resources'][$resource->getName()] = array(
+            $data['items'][$resource->getName()] = array(
                 'href' => $this->generateUrl('RestDescribe_Resources_getResource', array('resource' => $resource->getName()), true)
             );
         }

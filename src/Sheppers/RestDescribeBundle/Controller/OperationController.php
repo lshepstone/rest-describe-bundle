@@ -22,7 +22,7 @@ class OperationController extends Controller
      * @Describe\Operation(
      *   name="getOperations",
      *   scope="collection",
-     *   note="Gets operations for a resource"
+     *   note="Gets the operations for a resource"
      * )
      */
     public function getOperationsAction(Request $request, $resource)
@@ -45,12 +45,11 @@ class OperationController extends Controller
         );
 
         foreach ($operations as $operation) {
-            $data['operations'][$operation->getName()] = array(
+            $data['items'][$operation->getName()] = array(
                 'href' => $this->generateUrl('RestDescribe_Operations_getOperation', array(
                     'resource' => $operation->getResource()->getName(),
                     'operation' => $operation->getName()
-                ), true),
-                'description' => $operation->getNote()
+                ), true)
             );
         }
 
@@ -93,6 +92,13 @@ class OperationController extends Controller
                     'href' => $this->generateUrl('RestDescribe_Resources_getResource', array(
                         'resource' => $resource
                     ), true)
+                ),
+                array(
+                    'rel' => 'collection/DescribeParameter',
+                    'href' => $this->generateUrl('RestDescribe_Parameters_getParameters', array(
+                        'resource' => $resource,
+                        'operation' => $operation->getName()
+                    ), true)
                 )
             ),
             'name' => $operation->getName(),
@@ -102,17 +108,8 @@ class OperationController extends Controller
             'uri' => $operation->getUri()
         );
 
-        /** @var $parameter Parameter */
-        foreach ($operation->getParameters() as $parameter) {
-            $data['parameters'][$parameter->getName()] = array(
-                'description' => $parameter->getNote(),
-                'required' => $parameter->isRequired(),
-                'type' => $parameter->getType(),
-                'location' => $parameter->getLocation(),
-                'format' => $parameter->getFormat(),
-                'default' => $parameter->getDefault(),
-                'sample' => $parameter->getSample()
-            );
+        foreach ($operation->getResponses() as $response) {
+            $data['responses'][$response->getCode()] = $response->getMessage();
         }
 
         return $data;
