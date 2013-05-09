@@ -51,7 +51,7 @@ class Parameter
     protected $location;
 
     /**
-     * @ORM\Column(name="is_required", type="string")
+     * @ORM\Column(name="is_required", type="boolean")
      *
      * @var bool
      */
