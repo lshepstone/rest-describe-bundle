@@ -12,7 +12,7 @@ services:
 
     sheppers_rest_describe.describer.describe_resource_processor:
         class: %sheppers_rest_describe.describer.describe_resource_processor.class%
-        arguments: [ @doctrine.orm.describe_entity_manager ]
+        arguments: [ @doctrine.orm.describe_entity_manager, @annotation_reader ]
         tags:
             -  { name: sheppers_rest_describe.processor }
 

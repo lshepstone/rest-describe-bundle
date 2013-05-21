@@ -5,12 +5,8 @@ namespace Sheppers\RestDescribeBundle\Annotation\Describe;
 /**
  * @Annotation
  */
-class Parameter
+class Property
 {
-    const LOCATION_PATH = 'path';
-    const LOCATION_QUERY = 'query';
-    const LOCATION_ENTITY = 'entity';
-
     /**
      * @var string
      */
@@ -19,18 +15,7 @@ class Parameter
     /**
      * @var string
      */
-
     protected $note;
-
-    /**
-     * @var string
-     */
-    protected $location;
-
-    /**
-     * @var bool
-     */
-    protected $isRequired = false;
 
     /**
      * @var string
@@ -52,14 +37,22 @@ class Parameter
      */
     public function __construct($options)
     {
+        var_dump($options);
+        exit(__METHOD__);
+
         isset($options['type']) && $this->type = (string) $options['type'];
         isset($options['note']) && $this->note = (string) $options['note'];
-        isset($options['location']) && $this->location = (string) $options['location'];
-        isset($options['required']) && $this->isRequired = (boolean) $options['required'];
         isset($options['sample']) && $this->sample = (string) $options['sample'];
-        isset($options['location']) && $this->location = (string) $options['location'];
         isset($options['format']) && $this->format = (string) $options['format'];
         isset($options['default']) && $this->default = (string) $options['default'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
@@ -73,30 +66,6 @@ class Parameter
     /**
      * @return string
      */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isRequired()
-    {
-        return $this->isRequired;
-    }
-
-    /**
-     * @return string
-     */
     public function getSample()
     {
         return $this->sample;
@@ -105,9 +74,9 @@ class Parameter
     /**
      * @return string
      */
-    public function getType()
+    public function getFormat()
     {
-        return $this->type;
+        return $this->format;
     }
 
     /**

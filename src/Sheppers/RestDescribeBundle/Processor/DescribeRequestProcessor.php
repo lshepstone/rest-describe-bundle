@@ -34,8 +34,8 @@ class DescribeRequestProcessor extends AbstractProcessor
      */
     public function __construct(EntityManager $entityManager, AnnotationReader $annotationReader)
     {
-        $this->entityManager = $entityManager;
         $this->annotationReader = $annotationReader;
+        parent::__construct($entityManager);
     }
 
     /**
