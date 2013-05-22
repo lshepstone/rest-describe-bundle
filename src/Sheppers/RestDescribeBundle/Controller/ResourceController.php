@@ -21,7 +21,7 @@ class ResourceController extends Controller
      * @Describe\Operation(
      *   name="getResources",
      *   scope="collection",
-     *   note="Gets all resources and their relationships"
+     *   description="Gets all resources and their relationships"
      * )
      */
     public function getResourcesAction(Request $request)
@@ -50,7 +50,7 @@ class ResourceController extends Controller
      * @Describe\Operation(
      *   name="getResource",
      *   scope="resource",
-     *   note="Gets a specific resource",
+     *   description="Gets a specific resource",
      *   request=@Describe\Request(
      *     parameters={
      *       "resource"={

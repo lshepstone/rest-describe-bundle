@@ -63,7 +63,7 @@ class DescribeResourceProcessor extends AbstractProcessor
             if (null !== $annotation) {
                 $properties[$reflectionProperty->getName()] = array(
                     'type' => $annotation->getType(),
-                    'note' => $annotation->getNote(),
+                    'description' => $annotation->getDescription(),
                     'sample' => $annotation->getSample(),
                     'format' => $annotation->getFormat(),
                     'default' => $annotation->getDefault()
@@ -86,7 +86,7 @@ class DescribeResourceProcessor extends AbstractProcessor
             $entity = new Property($name, $resource);
 
             isset($property['name']) && $entity->setName($property['name']);
-            isset($property['note']) && $entity->setNote($property['note']);
+            isset($property['description']) && $entity->setDescription($property['description']);
             isset($property['type']) && $entity->setType($property['type']);
             isset($property['sample']) && $entity->setSample($property['sample']);
             isset($property['default']) && $entity->setDefault($property['default']);

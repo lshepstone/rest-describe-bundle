@@ -12,7 +12,7 @@ class Operation
     /**
      * @var string
      */
-    protected $note;
+    protected $description;
 
     /**
      * @var string
@@ -39,7 +39,7 @@ class Operation
      */
     public function __construct($options)
     {
-        isset($options['note']) && $this->note = (string) $options['note'];
+        isset($options['description']) && $this->description = (string) $options['description'];
         isset($options['name']) && $this->name = (string) $options['name'];
         isset($options['scope']) && $this->scope = (string) $options['scope'];
         isset($options['request']) && $this->request = $options['request'];
@@ -49,9 +49,9 @@ class Operation
     /**
      * @return string
      */
-    public function getNote()
+    public function getDescription()
     {
-        return $this->note;
+        return $this->description;
     }
 
     /**

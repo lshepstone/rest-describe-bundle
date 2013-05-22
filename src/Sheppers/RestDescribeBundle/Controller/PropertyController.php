@@ -22,7 +22,7 @@ class PropertyController extends Controller
      * @Describe\Operation(
      *   name="getProperties",
      *   scope="collection",
-     *   note="Gets the properties for a resource"
+     *   description="Gets the properties for a resource"
      * )
      */
     public function getPropertiesAction(Request $request, $resource)
@@ -47,7 +47,7 @@ class PropertyController extends Controller
         /** @var $property Property */
         foreach ($resource->getProperties() as $property) {
             $data['items'][$property->getName()] = array(
-                'description' => $property->getNote(),
+                'description' => $property->getDescription(),
                 'type' => $property->getType(),
                 'format' => $property->getFormat(),
                 'default' => $property->getDefault(),

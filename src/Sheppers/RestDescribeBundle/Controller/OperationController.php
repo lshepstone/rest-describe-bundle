@@ -22,7 +22,7 @@ class OperationController extends Controller
      * @Describe\Operation(
      *   name="getOperations",
      *   scope="collection",
-     *   note="Gets the operations for a resource"
+     *   description="Gets the operations for a resource"
      * )
      */
     public function getOperationsAction(Request $request, $resource)
@@ -62,7 +62,7 @@ class OperationController extends Controller
      * @Describe\Operation(
      *   name="getOperation",
      *   scope="resource",
-     *   note="Gets a specific resource operation",
+     *   description="Gets a specific resource operation",
      *   request=@Describe\Request(
      *     parameters={
      *       "resource"={
@@ -102,7 +102,7 @@ class OperationController extends Controller
                 )
             ),
             'name' => $operation->getName(),
-            'description' => $operation->getNote(),
+            'description' => $operation->getDescription(),
             'scope' => $operation->getScope(),
             'method' => $operation->getMethod(),
             'uri' => $operation->getUri()

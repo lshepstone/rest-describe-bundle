@@ -23,7 +23,7 @@ class DescribeOperationProcessor extends AbstractProcessor
     public function process($annotation, $operation, array $meta = null)
     {
         $operation
-            ->setNote($annotation->getNote())
+            ->setDescription($annotation->getDescription())
             ->setName($this->extractName($annotation, $meta))
             ->setScope($this->extractScope($annotation, $meta))
             ->setMethod($this->extractMethod($annotation, $meta))

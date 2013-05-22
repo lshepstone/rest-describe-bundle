@@ -41,7 +41,7 @@ class Parameter
      *
      * @var string
      */
-    protected $note;
+    protected $description;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -150,13 +150,13 @@ class Parameter
     }
 
     /**
-     * @param string $note
+     * @param string $description
      *
      * @return Parameter
      */
-    public function setNote($note)
+    public function setDescription($description)
     {
-        $this->note = (string) $note;
+        $this->description = (string) $description;
 
         return $this;
     }
@@ -164,9 +164,9 @@ class Parameter
     /**
      * @return string
      */
-    public function getNote()
+    public function getDescription()
     {
-        return $this->note;
+        return $this->description;
     }
 
     /**

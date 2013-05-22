@@ -85,7 +85,7 @@ class DescribeRequestProcessor extends AbstractProcessor
             if (null !== $annotation) {
                 $parameters[$reflectionProperty->getName()] = array(
                     'type' => $annotation->getType(),
-                    'note' => $annotation->getNote(),
+                    'description' => $annotation->getDescription(),
                     'location' => $annotation->getLocation(),
                     'required' => $annotation->isRequired(),
                     'sample' => $annotation->getSample(),
@@ -200,7 +200,7 @@ class DescribeRequestProcessor extends AbstractProcessor
             $entity = new Parameter($name, $operation);
 
             isset($parameter['name']) && $entity->setName($parameter['name']);
-            isset($parameter['note']) && $entity->setNote($parameter['note']);
+            isset($parameter['description']) && $entity->setDescription($parameter['description']);
             isset($parameter['location']) && $entity->setLocation($parameter['location']);
             isset($parameter['type']) && $entity->setType($parameter['type']);
             isset($parameter['sample']) && $entity->setSample($parameter['sample']);

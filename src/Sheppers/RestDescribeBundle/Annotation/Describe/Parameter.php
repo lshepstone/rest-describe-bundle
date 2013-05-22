@@ -20,7 +20,7 @@ class Parameter
      * @var string
      */
 
-    protected $note;
+    protected $description;
 
     /**
      * @var string
@@ -53,7 +53,7 @@ class Parameter
     public function __construct($options)
     {
         isset($options['type']) && $this->type = (string) $options['type'];
-        isset($options['note']) && $this->note = (string) $options['note'];
+        isset($options['description']) && $this->description = (string) $options['description'];
         isset($options['location']) && $this->location = (string) $options['location'];
         isset($options['required']) && $this->isRequired = (boolean) $options['required'];
         isset($options['sample']) && $this->sample = (string) $options['sample'];
@@ -65,9 +65,9 @@ class Parameter
     /**
      * @return string
      */
-    public function getNote()
+    public function getDescription()
     {
-        return $this->note;
+        return $this->description;
     }
 
     /**

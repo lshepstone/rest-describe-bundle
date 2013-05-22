@@ -22,7 +22,7 @@ class ParameterController extends Controller
      * @Describe\Operation(
      *   name="getParameters",
      *   scope="collection",
-     *   note="Gets the parameters for an operation"
+     *   description="Gets the parameters for an operation"
      * )
      */
     public function getParametersAction(Request $request, $resource, $operation)
@@ -48,7 +48,7 @@ class ParameterController extends Controller
         /** @var $parameter Parameter */
         foreach ($operation->getParameters() as $parameter) {
             $data['items'][$parameter->getName()] = array(
-                'description' => $parameter->getNote(),
+                'description' => $parameter->getDescription(),
                 'required' => $parameter->isRequired(),
                 'type' => $parameter->getType(),
                 'location' => $parameter->getLocation(),

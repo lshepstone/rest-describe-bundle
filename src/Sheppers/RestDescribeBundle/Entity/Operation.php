@@ -48,7 +48,7 @@ class Operation
      *
      * @var string
      */
-    protected $note;
+    protected $description;
 
     /**
      * Scope of the operation (collection or resource).
@@ -168,13 +168,13 @@ class Operation
     }
 
     /**
-     * @param string $note
+     * @param string $description
      *
      * @return Operation
      */
-    public function setNote($note)
+    public function setDescription($description)
     {
-        $this->note = (string) $note;
+        $this->description = (string) $description;
 
         return $this;
     }
@@ -182,9 +182,9 @@ class Operation
     /**
      * @return string
      */
-    public function getNote()
+    public function getDescription()
     {
-        return $this->note;
+        return $this->description;
     }
 
     /**
