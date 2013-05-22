@@ -37,9 +37,6 @@ class Property
      */
     public function __construct($options)
     {
-        var_dump($options);
-        exit(__METHOD__);
-
         isset($options['type']) && $this->type = (string) $options['type'];
         isset($options['note']) && $this->note = (string) $options['note'];
         isset($options['sample']) && $this->sample = (string) $options['sample'];

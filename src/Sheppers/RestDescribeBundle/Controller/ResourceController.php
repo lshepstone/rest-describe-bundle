@@ -74,6 +74,10 @@ class ResourceController extends Controller
                 array(
                     'rel' => 'collection/DescribeOperation',
                     'href' => $this->generateUrl('RestDescribe_Operations_getOperations', array('resource' => $resource->getName()), true)
+                ),
+                array(
+                    'rel' => 'collection/DescribeProperty',
+                    'href' => $this->generateUrl('RestDescribe_Properties_getProperties', array('resource' => $resource->getName()), true)
                 )
             )
         );

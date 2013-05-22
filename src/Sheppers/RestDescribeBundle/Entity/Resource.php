@@ -36,6 +36,13 @@ class Resource
     protected $operations;
 
     /**
+     * @ORM\OneToMany(targetEntity="Property", mappedBy="resource")
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected $properties;
+
+    /**
      * Constructs a Resource instance.
      *
      * @param string $name
@@ -44,6 +51,7 @@ class Resource
     {
         $this->setName($name);
         $this->operations = new ArrayCollection();
+        $this->properties = new ArrayCollection();
     }
 
     /**
@@ -104,5 +112,13 @@ class Resource
     public function getClass()
     {
         return $this->class;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProperties()
+    {
+        return $this->properties;
     }
 }

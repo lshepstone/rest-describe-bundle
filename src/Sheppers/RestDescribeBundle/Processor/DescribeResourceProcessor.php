@@ -7,6 +7,7 @@ use Doctrine\Common\Annotations\Reader as AnnotationReader;
 use Doctrine\ORM\EntityManager;
 use Sheppers\RestDescribeBundle\Annotation\Describe;
 use Sheppers\RestDescribeBundle\Entity\Resource;
+use Sheppers\RestDescribeBundle\Entity\Property;
 
 class DescribeResourceProcessor extends AbstractProcessor
 {
@@ -59,15 +60,10 @@ class DescribeResourceProcessor extends AbstractProcessor
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
             $annotation = $this->annotationReader->getPropertyAnnotation(
                 $reflectionProperty, '\Sheppers\RestDescribeBundle\Annotation\Describe\Property');
-
-            var_dump($annotation);
-
             if (null !== $annotation) {
                 $properties[$reflectionProperty->getName()] = array(
                     'type' => $annotation->getType(),
                     'note' => $annotation->getNote(),
-                    'location' => $annotation->getLocation(),
-                    'required' => $annotation->isRequired(),
                     'sample' => $annotation->getSample(),
                     'format' => $annotation->getFormat(),
                     'default' => $annotation->getDefault()
@@ -86,11 +82,8 @@ class DescribeResourceProcessor extends AbstractProcessor
      */
     protected function persistProperties(array $properties, Resource $resource)
     {
-        var_dump($properties);
-        exit(__METHOD__);
-
         foreach ($properties as $name => $property) {
-            $entity = new Property($name, $property);
+            $entity = new Property($name, $resource);
 
             isset($property['name']) && $entity->setName($property['name']);
             isset($property['note']) && $entity->setNote($property['note']);
