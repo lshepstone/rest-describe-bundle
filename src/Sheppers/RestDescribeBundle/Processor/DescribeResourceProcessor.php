@@ -40,7 +40,7 @@ class DescribeResourceProcessor extends AbstractProcessor
         ;
 
         if ($model = $annotation->getModel()) {
-            $properties = $this->getParametersFromModel($model);
+            $properties = $this->getPropertiesFromModel($model);
             $this->persistProperties($properties, $resource);
         }
     }
@@ -52,7 +52,7 @@ class DescribeResourceProcessor extends AbstractProcessor
      *
      * @return array
      */
-    protected function getParametersFromModel($model)
+    protected function getPropertiesFromModel($model)
     {
         $properties = array();
 
@@ -61,13 +61,19 @@ class DescribeResourceProcessor extends AbstractProcessor
             $annotation = $this->annotationReader->getPropertyAnnotation(
                 $reflectionProperty, '\Sheppers\RestDescribeBundle\Annotation\Describe\Property');
             if (null !== $annotation) {
-                $properties[$reflectionProperty->getName()] = array(
+                $name = $reflectionProperty->getName();
+                $properties[$name] = array(
                     'type' => $annotation->getType(),
                     'description' => $annotation->getDescription(),
                     'sample' => $annotation->getSample(),
                     'format' => $annotation->getFormat(),
-                    'default' => $annotation->getDefault()
+                    'default' => $annotation->getDefault(),
                 );
+
+                if ($model = $annotation->getModel()) {
+                    $properties[$name]['model'] = $model;
+                    $properties[$name]['properties'] = $this->getPropertiesFromModel($model);
+                }
             }
         }
 
@@ -79,21 +85,29 @@ class DescribeResourceProcessor extends AbstractProcessor
      *
      * @param array $properties
      * @param Resource $resource
+     * @param Property|null $parent
      */
-    protected function persistProperties(array $properties, Resource $resource)
+    protected function persistProperties(array $properties, Resource $resource, Property $parent = null)
     {
         foreach ($properties as $name => $property) {
             $entity = new Property($name, $resource);
+            if (null !== $parent) {
+                $entity->setParent($parent);
+            }
 
             isset($property['name']) && $entity->setName($property['name']);
             isset($property['description']) && $entity->setDescription($property['description']);
             isset($property['type']) && $entity->setType($property['type']);
-            isset($property['sample']) && $entity->setSample($property['sample']);
+            isset($property['model']) && $entity->setModel($property['model']);
+            isset($property['format']) && $entity->setFormat($property['format']);
             isset($property['default']) && $entity->setDefault($property['default']);
             isset($property['sample']) && $entity->setSample($property['sample']);
-            isset($property['format']) && $entity->setFormat($property['format']);
 
             $this->entityManager->persist($entity);
+
+            if (isset($property['properties']) && count($property['properties'])) {
+                $this->persistProperties($property['properties'], $resource, $entity);
+            }
         }
     }
 }

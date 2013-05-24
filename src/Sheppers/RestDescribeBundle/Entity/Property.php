@@ -2,6 +2,7 @@
 
 namespace Sheppers\RestDescribeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sheppers\RestDescribeBundle\Entity\Resource;
 
@@ -65,6 +66,28 @@ class Property
     protected $default;
 
     /**
+     * @ORM\Column(name="model", type="string", nullable=true)
+     *
+     * @var string
+     */
+    protected $model;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Property", inversedBy="properties")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     *
+     * @var Property
+     */
+    protected $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Property", mappedBy="parent")
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected $properties;
+
+    /**
      * Constructs a Property instance.
      *
      * @param string $name
@@ -74,6 +97,7 @@ class Property
     {
         $this->setName($name);
         $this->setResource($resource);
+        $this->properties = new ArrayCollection();
     }
 
     /**
@@ -214,5 +238,53 @@ class Property
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param string $model
+     *
+     * @return Property
+     */
+    public function setModel($model)
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param \Sheppers\RestDescribeBundle\Entity\Property $parent
+     *
+     * @return Property
+     */
+    public function setParent(Property $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return \Sheppers\RestDescribeBundle\Entity\Property
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getProperties()
+    {
+        return $this->properties;
     }
 }

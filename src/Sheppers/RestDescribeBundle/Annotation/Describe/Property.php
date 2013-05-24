@@ -33,6 +33,11 @@ class Property
     protected $default;
 
     /**
+     * @var string
+     */
+    protected $model;
+
+    /**
      * @param $options
      */
     public function __construct($options)
@@ -42,6 +47,7 @@ class Property
         isset($options['sample']) && $this->sample = (string) $options['sample'];
         isset($options['format']) && $this->format = (string) $options['format'];
         isset($options['default']) && $this->default = (string) $options['default'];
+        isset($options['model']) && $this->model = (string) $options['model'];
     }
 
     /**
@@ -82,5 +88,13 @@ class Property
     public function getDefault()
     {
         return $this->default;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModel()
+    {
+        return $this->model;
     }
 }

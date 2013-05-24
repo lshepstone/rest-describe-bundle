@@ -41,20 +41,39 @@ class PropertyController extends Controller
                         'resource' => $resource->getName()
                     ), true)
                 )
-            )
+            ),
+            'items' => $this->entitiesToArray($resource->getProperties())
         );
 
-        /** @var $property Property */
-        foreach ($resource->getProperties() as $property) {
-            $data['items'][$property->getName()] = array(
-                'description' => $property->getDescription(),
-                'type' => $property->getType(),
-                'format' => $property->getFormat(),
-                'default' => $property->getDefault(),
-                'sample' => $property->getSample()
+        return $data;
+    }
+
+    /**
+     * Converts an array of Property entity objects to an array.
+     *
+     * @param $entities
+     *
+     * @return array|null
+     */
+    protected function entitiesToArray($entities)
+    {
+        $properties = null;
+
+        foreach ($entities as $entity) {
+            $name = $entity->getName();
+            $properties[$name] = array(
+                'type' => $entity->getType(),
+                'description' => $entity->getDescription(),
+                'default' => $entity->getDefault(),
+                'format' => $entity->getFormat(),
+                'sample' => $entity->getSample()
             );
+
+            if (count($entity->getProperties())) {
+                $properties[$name]['properties'] = $this->entitiesToArray($entity->getProperties());
+            }
         }
 
-        return $data;
+        return $properties;
     }
 }
