@@ -117,6 +117,14 @@ class Resource
     /**
      * @return array
      */
+    public function getOperations()
+    {
+        return $this->operations;
+    }
+
+    /**
+     * @return array
+     */
     public function getProperties()
     {
         return $this->properties;
