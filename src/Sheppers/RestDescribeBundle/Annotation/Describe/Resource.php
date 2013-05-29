@@ -33,7 +33,7 @@ class Resource
     public function __construct($options)
     {
         isset($options['name']) && $this->name = (string) $options['name'];
-        isset($options['description']) && $this->model = (string) $options['description'];
+        isset($options['description']) && $this->description = (string) $options['description'];
         isset($options['model']) && $this->model = (string) $options['model'];
         isset($options['relationships']) && $this->relationships = $options['relationships'];
     }

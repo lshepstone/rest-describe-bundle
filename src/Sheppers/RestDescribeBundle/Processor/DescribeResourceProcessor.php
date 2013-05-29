@@ -36,6 +36,7 @@ class DescribeResourceProcessor extends AbstractProcessor
     {
         $resource
             ->setName($annotation->getName())
+            ->setDescription($annotation->getDescription())
             ->setClass($meta['class'])
         ;
 

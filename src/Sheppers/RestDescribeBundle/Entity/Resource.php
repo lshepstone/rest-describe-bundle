@@ -26,6 +26,11 @@ class Resource
     /**
      * @ORM\Column(type="string", nullable=true)
      */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
     protected $class;
 
     /**
@@ -92,6 +97,26 @@ class Resource
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param $description
+     *
+     * @return Resource
+     */
+    public function setDescription($description)
+    {
+        $this->description = (string) $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
