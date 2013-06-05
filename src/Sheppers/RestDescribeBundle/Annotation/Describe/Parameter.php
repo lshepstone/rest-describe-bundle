@@ -14,6 +14,11 @@ class Parameter
     /**
      * @var string
      */
+    protected $name;
+
+    /**
+     * @var string
+     */
     protected $type;
 
     /**
@@ -52,6 +57,7 @@ class Parameter
      */
     public function __construct($options)
     {
+        isset($options['name']) && $this->name = (string) $options['name'];
         isset($options['type']) && $this->type = (string) $options['type'];
         isset($options['description']) && $this->description = (string) $options['description'];
         isset($options['location']) && $this->location = (string) $options['location'];
@@ -60,6 +66,14 @@ class Parameter
         isset($options['location']) && $this->location = (string) $options['location'];
         isset($options['format']) && $this->format = (string) $options['format'];
         isset($options['default']) && $this->default = (string) $options['default'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

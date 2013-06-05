@@ -62,7 +62,7 @@ class DescribeResourceProcessor extends AbstractProcessor
             $annotation = $this->annotationReader->getPropertyAnnotation(
                 $reflectionProperty, '\Sheppers\RestDescribeBundle\Annotation\Describe\Property');
             if (null !== $annotation) {
-                $name = $reflectionProperty->getName();
+                $name = $annotation->getName() ?: $reflectionProperty->getName();
                 $properties[$name] = array(
                     'type' => $annotation->getType(),
                     'description' => $annotation->getDescription(),
