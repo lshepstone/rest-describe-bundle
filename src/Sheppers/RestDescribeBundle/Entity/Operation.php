@@ -78,6 +78,15 @@ class Operation
     protected $uri;
 
     /**
+     * Indicates whether the operation has Response.
+     *
+     * @ORM\Column(name="is_response_empty", type="boolean")
+     *
+     * @var bool
+     */
+    protected $isResponseEmpty = false;
+
+    /**
      * Operation request parameters.
      *
      * @ORM\OneToMany(targetEntity="Parameter", mappedBy="operation")
@@ -145,6 +154,22 @@ class Operation
     public function getUri()
     {
         return $this->uri;
+    }
+
+    /**
+     * @param boolean $isResponseEmpty
+     */
+    public function setIsResponseEmpty($isResponseEmpty)
+    {
+        $this->isResponseEmpty = (bool) $isResponseEmpty;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsResponseEmpty()
+    {
+        return $this->isResponseEmpty;
     }
 
     /**

@@ -25,6 +25,10 @@ class DescribeResponseProcessor extends AbstractProcessor
         if (null !== ($codes = $annotation->getCodes())) {
             $this->persistCodes($codes, $entity);
         }
+
+        if (null !== ($isEmpty = $annotation->getIsEmpty())) {
+            $entity->setIsResponseEmpty($isEmpty);
+        }
     }
 
     /**

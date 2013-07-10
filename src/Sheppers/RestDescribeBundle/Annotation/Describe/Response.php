@@ -13,11 +13,17 @@ class Response
     protected $codes;
 
     /**
+     * @var bool
+     */
+    protected $isEmpty;
+
+    /**
      * @param array $options
      */
     public function __construct($options)
     {
         isset($options['codes']) && $this->codes = $options['codes'];
+        isset($options['isEmpty']) && $this->isEmpty = $options['isEmpty'];
     }
 
     /**
@@ -26,5 +32,13 @@ class Response
     public function getCodes()
     {
         return $this->codes;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsEmpty()
+    {
+        return $this->isEmpty;
     }
 }
