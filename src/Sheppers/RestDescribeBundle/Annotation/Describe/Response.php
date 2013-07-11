@@ -23,7 +23,7 @@ class Response
     public function __construct($options)
     {
         isset($options['codes']) && $this->codes = $options['codes'];
-        isset($options['isEmpty']) && $this->isEmpty = $options['isEmpty'];
+        isset($options['empty']) && $this->isEmpty = $options['empty'];
     }
 
     /**
@@ -37,7 +37,7 @@ class Response
     /**
      * @return bool
      */
-    public function getIsEmpty()
+    public function isEmpty()
     {
         return $this->isEmpty;
     }
