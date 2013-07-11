@@ -194,7 +194,7 @@ class Parameter
      *
      * @return Parameter
      */
-    public function setRequired($isRequired)
+    public function setIsRequired($isRequired)
     {
         $this->isRequired = (boolean) $isRequired;
 

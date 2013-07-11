@@ -27,7 +27,7 @@ class DescribeResponseProcessor extends AbstractProcessor
         }
 
         if (null !== ($isEmpty = $annotation->isEmpty())) {
-            $entity->setResponseEmpty($isEmpty);
+            $entity->setIsResponseEmpty($isEmpty);
         }
     }
 
