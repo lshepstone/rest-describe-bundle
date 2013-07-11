@@ -159,15 +159,17 @@ class Operation
     /**
      * @param boolean $isResponseEmpty
      */
-    public function setIsResponseEmpty($isResponseEmpty)
+    public function setResponseEmpty($isResponseEmpty)
     {
         $this->isResponseEmpty = (bool) $isResponseEmpty;
+
+        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function getIsResponseEmpty()
+    public function isResponseEmpty()
     {
         return $this->isResponseEmpty;
     }
