@@ -205,7 +205,7 @@ class DescribeRequestProcessor extends AbstractProcessor
             isset($parameter['location']) && $entity->setLocation($parameter['location']);
             isset($parameter['type']) && $entity->setType($parameter['type']);
             isset($parameter['sample']) && $entity->setSample($parameter['sample']);
-            isset($parameter['required']) && $entity->setRequired($parameter['required']);
+            isset($parameter['required']) && $entity->setIsRequired($parameter['required']);
             isset($parameter['default']) && $entity->setDefault($parameter['default']);
             isset($parameter['sample']) && $entity->setSample($parameter['sample']);
             isset($parameter['format']) && $entity->setFormat($parameter['format']);
