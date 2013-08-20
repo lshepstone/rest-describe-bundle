@@ -10,7 +10,7 @@ use Sheppers\RestDescribeBundle\Entity\Resource;
  * @ORM\Table(name="operation")
  * @ORM\Entity(repositoryClass="Sheppers\RestDescribeBundle\Repository\OperationRepository")
  */
-class Operation
+class Operation implements SecureInterface
 {
     const SCOPE_RESOURCE = 'resource';
     const SCOPE_COLLECTION = 'collection';
@@ -103,6 +103,15 @@ class Operation
      * @var array
      */
     protected $responses = array();
+
+    /**
+     * Operation roles.
+     *
+     * @ORM\Column(type="array", nullable=true)
+     *
+     * @var array
+     */
+    protected $roles = array();
 
     /**
      * @param string $name
@@ -268,5 +277,25 @@ class Operation
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    /**
+     * @param array $roles
+     *
+     * @return Operation
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }
