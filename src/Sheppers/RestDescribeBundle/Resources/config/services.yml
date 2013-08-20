@@ -4,6 +4,7 @@ parameters:
     sheppers_rest_describe.describer.describe_operation_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeOperationProcessor
     sheppers_rest_describe.describer.describe_request_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeRequestProcessor
     sheppers_rest_describe.describer.describe_response_processor.class: Sheppers\RestDescribeBundle\Processor\DescribeResponseProcessor
+    sheppers_rest_describe.describer.jms_secure_processor.class: Sheppers\RestDescribeBundle\Processor\JMSSecureProcessor
 
 services:
     sheppers_rest_describe.describer:
@@ -30,6 +31,12 @@ services:
 
     sheppers_rest_describe.describer.describe_response_processor:
         class: %sheppers_rest_describe.describer.describe_response_processor.class%
+        arguments: [ @doctrine.orm.describe_entity_manager ]
+        tags:
+            -  { name: sheppers_rest_describe.processor }
+
+    sheppers_rest_describe.describer.jms_secure_processor:
+        class: %sheppers_rest_describe.describer.jms_secure_processor.class%
         arguments: [ @doctrine.orm.describe_entity_manager ]
         tags:
             -  { name: sheppers_rest_describe.processor }
