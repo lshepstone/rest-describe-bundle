@@ -19,7 +19,7 @@ class Parameter
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Operation", inversedBy="parameters")
+     * @ORM\ManyToOne(targetEntity="Operation", inversedBy="parameters", cascade={"persist"})
      * @ORM\JoinColumn(name="operation_id", referencedColumnName="id")
      */
     protected $operation;
